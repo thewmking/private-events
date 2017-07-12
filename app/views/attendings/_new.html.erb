@@ -1,0 +1,7 @@
+
+  <div>
+    <%= form_for(@attendee) do |f| %>
+      <%= f.hidden_field :event_id %>
+      <%= f.submit "RSVP", class: "btn btn-primary" %>
+    <% end %>
+  </div>

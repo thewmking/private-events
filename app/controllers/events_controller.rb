@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.all
+    @future_events = Event.future
+    @past_events   = Event.past
   end
 
   def new
@@ -15,6 +16,12 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @attendees = @event.attendees
+    if @attendees.include?(current_user)
+      @attendee = Attending.find_by(event_id: @event.id, attendee_id: current_user.id)
+    else
+      @attendee = @event.attendings.build(attendee_id: current_user.id)
+    end
   end
 
   def destroy

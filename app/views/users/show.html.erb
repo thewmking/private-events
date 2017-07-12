@@ -3,15 +3,33 @@
     <section class="user_info">
       <h1>
         <%= @user.name %>
+        <br>
+        created events
       </h1>
       <div>
         <% @created_events.each do |e| %>
-        <ul class="event-card">
-          <li><%= e.name %></li>
-          <li><%= e.location %></li>
-          <li><%= e.date %></li>
-        </ul>
+          <ul class="event-card">
+            <li class="event-link"><%= link_to "#{e.name}", "/events/#{e.id}" %></li>
+            <li>Location: <%= e.location %></li>
+            <li>Date: <%= e.date %></li>
+          </ul>
         <% end %>
       </div>
+      <div>
+        <h1>events <%= @user.name %> is attending:</h1>
+        <ul>
+          <h1>past events</h1>
+          <% @past_events.each do |e| %>
+            <li><%= link_to "#{e.name}", "/events/#{e.id}" %></li>
+          <% end %>
+        </ul>
+        <ul>
+          <h1>future events</h1>
+          <% @future_events.each do |e| %>
+            <li><%= link_to "#{e.name}", "/events/#{e.id}" %></li>
+          <% end %>
+        </ul>
+      </div>
+
     </section>
 </div>

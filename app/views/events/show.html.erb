@@ -1,13 +1,30 @@
 <div class="row">
-  <aside class="col-md-4">
+  <aside class="col-md-12">
     <section class="user_info">
       <h1>
         <%= @event.name %>
       </h1>
-      <ul>
+      <ul class="event-card">
         <li>Location: <%= @event.location %></li>
         <li>Creator: <%= @event.creator.name %></li>
         <li>Date: <%= @event.date %></li>
       </ul>
+      <ul>
+        <h1>Attendees</h1>
+        <% @event.attendees.each do |a| %>
+          <li><%= link_to "#{a.name}", user_path %></li>
+        <% end %>
+      </ul>
+      <div>
+        <% if current_user.attendings.where(event_id: @event.id).exists? %>
+          <%= form_for @attendee, method: :delete do |f| %>
+            <%= f.hidden_field :event_id %>
+            <%= f.submit "cancel RSVP", class: "btn btn-primary" %>
+          <% end %>
+        <% else %>
+          <%= render 'attendings/new' %>
+        <% end %>
+      </div>
     </section>
+  </aside>
 </div>

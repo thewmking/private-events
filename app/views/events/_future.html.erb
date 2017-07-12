@@ -1,0 +1,19 @@
+<section class="user_info">
+  <h1>future events</h1>
+  <%= @future_events.each do |e| %>
+    <h1>
+      <%= e.name %>
+    </h1>
+    <ul class="event-card">
+      <li>Location: <%= e.location %></li>
+      <li>Creator: <%= e.creator.name %></li>
+      <li>Date: <%= e.date %></li>
+    </ul>
+    <ul>
+      <h1>Attendees</h1>
+      <% e.attendees.each do |a| %>
+        <li><%= link_to "#{a.name}", user_path %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>
