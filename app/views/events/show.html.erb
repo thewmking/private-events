@@ -10,18 +10,19 @@
         <li>Date: <%= @event.date %></li>
         <li>Description: <%= @event.description %></li>
       </ul>
-      <div>
-        <% if current_user.attendings.where(event_id: @event.id).exists? %>
-          <%= form_for @attendee, method: :delete do |f| %>
-            <%= f.hidden_field :event_id %>
-            <%= f.submit "cancel rsvp", class: "btn btn-primary btn-red btn-big" %>
-          <% end %>
-        <% else %>
-          <%= render 'attendings/new' %>
-        <% end %>
-      </div>
+
       <br>
       <div class="col-md-4 attendee-list">
+        <div>
+          <% if current_user.attendings.where(event_id: @event.id).exists? %>
+            <%= form_for @attendee, method: :delete do |f| %>
+              <%= f.hidden_field :event_id %>
+              <%= f.submit "cancel rsvp", class: "btn btn-primary btn-red btn-big" %>
+            <% end %>
+          <% else %>
+            <%= render 'attendings/new' %>
+          <% end %>
+        </div>
         <ul>
           <h1>Attendees</h1>
           <% @event.attendees.each do |a| %>
@@ -33,10 +34,10 @@
       </div>
       <div class="col-md-7 comment-feed">
         <h1>Comments</h1>
+        <%= render 'comments/form' %>
         <% if @comment_feed.present? %>
             <%= render 'comments/comment' %>
         <% end %>
-        <%= render 'comments/form' %>
       </div>
 
     </section>
