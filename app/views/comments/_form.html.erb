@@ -1,0 +1,10 @@
+<%= form_for(@comment) do |f| %>
+  <br>
+  <%= f.hidden_field :event_id %>
+  <%= f.hidden_field :user_id %>
+  <%= f.text_area :content,
+                  placeholder: "Can't make it? Any questions? Bringing something? Mention it here!",
+                  class: 'form-control' %>
+
+  <%= f.submit "Post comment", class: "btn btn-primary" %>
+<% end %>

@@ -1,30 +1,43 @@
 <div class="row">
   <aside class="col-md-12">
     <section class="user_info">
-      <h1>
+      <h1 class="big-title">
         <%= @event.name %>
       </h1>
       <ul class="event-card">
-        <li>Location: <%= @event.location %></li>
+        <li class="event-items">Location: <%= @event.location %></li>
         <li>Creator: <%= @event.creator.name %></li>
         <li>Date: <%= @event.date %></li>
-      </ul>
-      <ul>
-        <h1>Attendees</h1>
-        <% @event.attendees.each do |a| %>
-          <li><%= link_to "#{a.name}", user_path %></li>
-        <% end %>
+        <li>Description: <%= @event.description %></li>
       </ul>
       <div>
         <% if current_user.attendings.where(event_id: @event.id).exists? %>
           <%= form_for @attendee, method: :delete do |f| %>
             <%= f.hidden_field :event_id %>
-            <%= f.submit "cancel RSVP", class: "btn btn-primary" %>
+            <%= f.submit "cancel rsvp", class: "btn btn-primary btn-red btn-big" %>
           <% end %>
         <% else %>
           <%= render 'attendings/new' %>
         <% end %>
       </div>
+      <br>
+      <div class="col-md-4 attendee-list">
+        <ul>
+          <h1>Attendees</h1>
+          <% @event.attendees.each do |a| %>
+            <li><%= link_to "#{a.name}", "/users/#{a.id}", class: "attendee" %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-md-1">
+      </div>
+      <div class="col-md-7 comment-feed">
+        <% if @comment_feed.present? %>
+            <%= render 'comments/comment' %>
+        <% end %>
+        <%= render 'comments/form' %>
+      </div>
+
     </section>
   </aside>
 </div>

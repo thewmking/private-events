@@ -1,0 +1,17 @@
+<h1>Comments</h1>
+<%- @comment_feed.each do |c| %>
+  <li id="comment">
+    <span class="user"><%= link_to c.user.name, c.user %></span>
+    <span class="content">
+      <%= c.content %>
+    </span>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(c.created_at) %> ago.
+      <% if current_user?(c.user) %>
+        <%= link_to "delete", c, method: :delete,
+                                 data: { confirm: "You sure?" },
+                                 class: "delete" %>
+      <% end %>
+    </span>
+  </li>
+<% end %>

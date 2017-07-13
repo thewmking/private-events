@@ -10,7 +10,7 @@ class AttendingsController < ApplicationController
     @attendee = Attending.new(event_id: event_id, attendee_id: attendee_id)
     @attendee.save
     if @attendee.save
-      flash[:success] = "Reservation confirmed!"
+      flash[:success] = "Reservation confirmed! Looking forward to seeing you!"
       redirect_to event_path(event_id)
     end
   end
@@ -24,7 +24,7 @@ class AttendingsController < ApplicationController
     event_id = params[:attending][:event_id]
     @attendee = Attending.where(id: id).first
     @attendee.destroy
-    flash[:success] = "RSVP Canceled"
+    flash[:success] = "RSVP Canceled. Sorry you can't make it!"
     redirect_to event_path(event_id)
   end
 

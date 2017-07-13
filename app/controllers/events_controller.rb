@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :logged_in_user, only: [:create, :destroy, :index, :show, :new]
   def index
     @future_events = Event.future
     @past_events   = Event.past
@@ -16,12 +17,15 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+
+    @comment = @event.comments.build(user_id: current_user.id)
     @attendees = @event.attendees
     if @attendees.include?(current_user)
       @attendee = Attending.find_by(event_id: @event.id, attendee_id: current_user.id)
     else
       @attendee = @event.attendings.build(attendee_id: current_user.id)
     end
+    @comment_feed = @event.comments.where("content != ?", '').all
   end
 
   def destroy
@@ -30,7 +34,7 @@ class EventsController < ApplicationController
 
   private
     def event_params
-      params.require(:event).permit(:name, :creator, :location, :date)
+      params.require(:event).permit(:name, :creator, :location, :date, :description)
     end
 
 end

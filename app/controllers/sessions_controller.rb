@@ -6,11 +6,11 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:session][:name])
     if user != nil
       log_in user
-      redirect_to user
+      redirect_to root_url
     else
       message = "Account does not exist. Click 'Sign Up' to create an account"
       flash[:warning] = message
-      redirect_to root_url
+      redirect_to login_url
     end
   end
 

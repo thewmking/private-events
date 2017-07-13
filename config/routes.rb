@@ -9,5 +9,6 @@ delete '/logout', to: 'sessions#destroy'
 resources :users,  only: [:index, :new, :create, :show]
 resources :events, only: [:index, :new, :create, :show]
 resources :attendings, only: [:new, :create, :destroy]
+resources :comments, only: [:new, :create, :destroy]
 
 end

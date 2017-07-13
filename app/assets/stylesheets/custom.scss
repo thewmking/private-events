@@ -4,10 +4,11 @@
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
-$dark-gray: #2A363B;
+$dark-gray: #233142;
 $reddish: #E84A5F;
-$peach: #FF847B;
-$apricot: #FECEA8;
+$bluish: #455D7A;
+$blue: #0092CA;
+$light-grey: #E3E3E3;
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -19,7 +20,8 @@ $apricot: #FECEA8;
 
 body {
   padding-top: 65px;
-  background-color: $apricot
+  background-color: #191919;
+  color: $light-grey;
 }
 
 section {
@@ -79,13 +81,13 @@ p {
   float: left;
   margin-right: 10px;
   font-size: 1.7em;
-  color: $peach;
+  color: $bluish;
   text-transform: lowercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: $apricot;
+    color: $light-grey;
     text-decoration: none;
   }
 }
@@ -97,10 +99,10 @@ p {
 .navbar-inverse .navbar-nav {
   li {
     a {
-      color: $peach;
+      color: $bluish;
     }
     a:hover {
-      color: $apricot;
+      color: $light-grey;
     }
   }
   li:hover {
@@ -258,29 +260,149 @@ span.picture {
 }
 
 /* events */
+.big-title {
+  font-size: 5em;
+}
+
 .event-card {
-  background-color: $peach;
+  background-color: $dark-gray;
   border-radius: 5px;
-  color: $apricot;
+  color: $light-grey;
+  padding: 20px 10px 20px 10px;
+  font-size: 1.8em;
   li {
     background-color: $dark-gray;
     padding-left: 1em;
+    padding-right: 1em;
   }
 
 }
 
 .event-link {
   a {
-    color: $apricot;
-    background-color: $reddish;
+    color: $light-grey;
     font-size: 1.3em;
     padding: 0px 2px 2px 2px;
 
   }
 }
 
-
 .btn-primary {
   text-decoration: none;
   color: #FFF;
+  background-color: #2DAF94;
+  border: none;
+  &:hover {
+    animation-name: button-shift-green;
+    animation-duration: 1s;
+    background-color: #4BE4C5;
+  }
+  &:focus {
+    background-color: #4BE4C5;
+    border: none;
+  }
+  &:active {
+    background-color: #4BE4C5;
+    border: none;
+  }
+}
+
+.btn-big {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  line-height: 75px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2.5em;
+}
+
+.btn-red {
+  background-color: $reddish;
+  border: none;
+  &:hover {
+    animation-name: button-shift-red;
+    animation-duration: 1s;
+    background-color: #da2c43;
+    border-color: $reddish;
+  }
+  &:focus {
+    background-color: #da2c43;
+    border: none;
+  }
+  &:active {
+    background-color: #da2c43;
+    border: none;
+  }
+}
+
+.attendee-list {
+  background-color: $dark-gray;
+  font-size: 1.5em;
+  border-radius: 5px;
+  padding: 20px 10px 20px 10px;
+  li {
+    a {
+      color: $light-grey;
+      text-decoration: none;
+      &:hover {
+        color: $blue;
+      }
+    }
+  }
+}
+
+.comment-feed {
+  background-color: $dark-gray;
+  font-size: 1.5em;
+  border-radius: 5px;
+  padding: 20px 10px 20px 10px;
+  li {
+    margin-top: 15px;
+  }
+  span {
+    color: $light-grey;
+    line-height: 25px;
+    a {
+      color: $light-grey;
+      text-decoration: none;
+      &:hover {
+        color: $blue;
+      }
+    }
+    a.delete {
+      &:hover {
+        color: $reddish;
+      }
+    }
+
+  }
+  .timestamp {
+    font-size: .8em;
+    color: $bluish;
+  }
+
+}
+
+
+
+/* media queries */
+
+@media (max-width: 768px) {
+  .nav > li {
+    float: right;
+  }
+}
+
+
+/* keyframes */
+
+@keyframes button-shift-green {
+    from {background-color: #2DAF94;}
+    to {background-color: #4BE4C5;}
+}
+
+@keyframes button-shift-red {
+    from {background-color: $reddish;}
+    to {background-color: #da2c43;}
 }

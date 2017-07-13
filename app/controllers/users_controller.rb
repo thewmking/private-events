@@ -10,8 +10,14 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
-    redirect_to root_url
+    if @user.save
+      flash[:success] = "Account created! You are now logged in!"
+      log_in @user
+      redirect_to root_url
+    else
+      flash[:warning] = "That name is already taken. Please try again."
+      render 'new'
+    end
   end
 
   def show
