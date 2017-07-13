@@ -22,7 +22,11 @@ class CommentsController < ApplicationController\
   end
 
   def destroy
-
+    comment_id = params[:id]
+    @comment = Comment.find_by(id: comment_id)
+    @comment.destroy
+    flash[:success] = "Comment deleted"
+    redirect_to root_url
   end
 
   private
