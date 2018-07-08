@@ -28,6 +28,22 @@ class EventsController < ApplicationController
     @comment_feed = @event.comments.where("content != ?", '').all
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(event_params)
+      flash[:success] = "Event updated!"
+      log_in @event
+      redirect_to @event
+    else
+      flash[:warning] = "Error updating event. Please try again."
+      render 'edit'
+    end
+  end
+
   def destroy
     Event.find(params[:id]).destroy
   end
