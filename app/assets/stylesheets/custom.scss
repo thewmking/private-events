@@ -391,6 +391,22 @@ span.picture {
 
 }
 
+/* footer */
+footer {
+  border: none;
+}
+.icons {
+  float: right;
+  margin-right: 10px;
+  bottom: 10px;
+  position: relative;
+  color: #2DAF94;
+  &:hover {
+    color: #4BE4C5;
+    animation-name: icon-shift;
+    animation-duration: 1s;
+  }
+}
 
 
 /* media queries */
@@ -412,4 +428,9 @@ span.picture {
 @keyframes button-shift-red {
     from {background-color: $reddish;}
     to {background-color: #da2c43;}
+}
+
+@keyframes icon-shift {
+  from {color: #2DAF94;}
+  to {color: #4BE4C5;}
 }
